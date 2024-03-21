@@ -210,11 +210,16 @@
   (assert (a-fact (name tampering) (cf (* (min ?cf1 ?cf2) 0.6))))
 )
 
-(defrule is-repudiation
+(defrule is-repudiation-denial
   ?fact1 <- (a-fact (name denial) (cf ?cf1))
-  ?fact2 <- (a-fact (name log) (cf ?cf2))
   =>
-  (assert (a-fact (name repudiation) (cf (* (max ?cf1 ?cf2) 0.7))))
+  (assert (a-fact (name repudiation) (cf (* ?cf1 0.7))))
+)
+
+(defrule is-repudiation-log
+  ?fact1 <- (a-fact (name log) (cf ?cf1))
+  =>
+  (assert (a-fact (name repudiation) (cf (* ?cf1 0.7))))
 )
 
 (defrule is-info-disclosure
